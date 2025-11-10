@@ -1,0 +1,64 @@
+﻿@page "/ListaFacturas"
+@rendermode InteractiveServer
+@using FACTURA.Components.Data
+@inject ServicioFacturas ServicioFacturas
+@inject NavigationManager Nav
+
+<h2>🧾 Facturas</h2>
+<button @onclick="IrNuevaFactura">➕ Nueva Factura</button>
+
+@if (facturas is null)
+{
+    <p>Cargando…</p>
+}
+else if (facturas.Count == 0)
+{
+    <p>No hay facturas.</p>
+}
+else
+{
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var f in facturas)
+            {
+                <tr>
+                    <td>@f.Id</td>
+                    <td>@f.Cliente</td>
+                    <td>@f.Fecha.ToString("yyyy-MM-dd")</td>
+                    <td>@f.Total</td>
+                    <td>
+                        <a href="/DetalleFactura/@f.Id">Ver / Editar</a>
+                        <button @onclick="() => Eliminar(f.Id)">Eliminar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Factura>? facturas;
+
+    protected override async Task OnInitializedAsync()
+    {
+        facturas = await ServicioFacturas.ObtenerFacturas();
+    }
+
+    private async Task Eliminar(int id)
+    {
+        await ServicioFacturas.EliminarFactura(id);
+        facturas = await ServicioFacturas.ObtenerFacturas();
+        StateHasChanged();
+    }
+
+    private void IrNuevaFactura() => Nav.NavigateTo("/Facturas");
+}

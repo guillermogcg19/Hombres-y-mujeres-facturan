@@ -1,0 +1,99 @@
+﻿@page "/DetalleFactura/{id:int}"
+@rendermode InteractiveServer
+@inject ServicioFacturas ServicioFacturas
+@inject NavigationManager Nav
+@using FACTURA.Components.Data
+
+<h3>Detalle de Factura</h3>
+
+@if (factura is null)
+{
+    <p>Cargando...</p>
+}
+else
+{
+    <div>
+        <label>Cliente:</label>
+        <input @bind="factura.Cliente" />
+        <label>Fecha:</label>
+        <input type="date" @bind="factura.Fecha" />
+        <button @onclick="GuardarCabecera">Guardar cambios</button>
+        <button @onclick="Volver">Volver</button>
+    </div>
+
+    <h4>Artículos</h4>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var a in factura.Articulos)
+            {
+                <tr>
+                    <td><input @bind="a.Nombre" /></td>
+                    <td><input type="number" @bind="a.Cantidad" /></td>
+                    <td><input type="number" step="0.01" @bind="a.Precio" /></td>
+                    <td>@a.Subtotal</td>
+                    <td>
+                        <button @onclick="() => ActualizarArticulo(a)">Actualizar</button>
+                        <button @onclick="() => EliminarArticulo(a.Id)">Eliminar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div style="margin-top:10px">
+        <input placeholder="Nuevo artículo" @bind="nuevo.Nombre" />
+        <input type="number" min="1" placeholder="Cantidad" @bind="nuevo.Cantidad" />
+        <input type="number" step="0.01" placeholder="Precio" @bind="nuevo.Precio" />
+        <button @onclick="AgregarArticulo">Agregar</button>
+    </div>
+
+    <p><strong>Total:</strong> @factura.Total</p>
+}
+
+@code {
+    [Parameter] public int id { get; set; }
+    private Factura? factura;
+    private Articulo nuevo = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        factura = await ServicioFacturas.ObtenerFacturaPorId(id);
+    }
+
+    private async Task GuardarCabecera()
+    {
+        if (factura != null)
+            await ServicioFacturas.ActualizarFacturaCabecera(factura);
+    }
+
+    private async Task ActualizarArticulo(Articulo a)
+    {
+        await ServicioFacturas.ActualizarArticulo(a);
+        factura = await ServicioFacturas.ObtenerFacturaPorId(id);
+    }
+
+    private async Task EliminarArticulo(int articuloId)
+    {
+        await ServicioFacturas.EliminarArticulo(articuloId);
+        factura = await ServicioFacturas.ObtenerFacturaPorId(id);
+    }
+
+    private async Task AgregarArticulo()
+    {
+        if (factura == null || string.IsNullOrWhiteSpace(nuevo.Nombre)) return;
+        await ServicioFacturas.AgregarArticulo(factura.Id, nuevo);
+        nuevo = new();
+        factura = await ServicioFacturas.ObtenerFacturaPorId(id);
+    }
+
+    private void Volver() => Nav.NavigateTo("/ListaFacturas");
+}

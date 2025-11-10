@@ -1,2 +1,0 @@
-wwwroot\app.css
-C:\Users\Guillermo\Desktop\FACTURA\wwwroot\app.css

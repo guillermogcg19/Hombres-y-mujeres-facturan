@@ -1,11 +1,12 @@
 ﻿using FACTURA.Components;
+using FACTURA.Components.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddSingleton<FACTURA.Components.Data.ServicioFacturas>();
+builder.Services.AddSingleton<ServicioFacturas>(); // <= registro
 
 var app = builder.Build();
 
@@ -16,10 +17,10 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseAntiforgery();
 
-app.MapStaticAssets();
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+   .AddInteractiveServerRenderMode(); // <= habilita interactividad server
 
 app.Run();
