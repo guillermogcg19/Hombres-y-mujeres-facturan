@@ -1,0 +1,49 @@
+﻿@page "/DetalleFactura/{id:int}"
+@using FACTURA.Components.Data
+@inject ServicioFacturas ServicioFacturas
+
+<h3>Detalle de factura</h3>
+
+@if (factura == null)
+{
+    <p>Cargando...</p>
+}
+else
+{
+    <p><b>Factura:</b> @factura.NombreFactura</p>
+    <p><b>Cliente:</b> @factura.Cliente</p>
+    <p><b>Fecha:</b> @factura.Fecha.ToString("dd/MM/yyyy HH:mm")</p>
+
+    <h4>Artículos</h4>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Artículo</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var a in factura.Articulos)
+            {
+                <tr>
+                    <td>@a.Nombre</td>
+                    <td>@a.Cantidad</td>
+                    <td>@a.Precio</td>
+                    <td>@a.Subtotal</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    [Parameter] public int id { get; set; }
+    private Factura? factura;
+
+    protected override async Task OnInitializedAsync()
+    {
+        factura = await ServicioFacturas.ObtenerFacturaPorId(id);
+    }
+}

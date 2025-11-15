@@ -1,0 +1,59 @@
+﻿@page "/ListaFacturas"
+@using FACTURA.Components.Data
+@inject ServicioFacturas ServicioFacturas
+
+<h3>Facturas guardadas</h3>
+
+@if (facturas == null)
+{
+    <p>Cargando...</p>
+}
+else if (facturas.Count == 0)
+{
+    <p>No hay facturas registradas.</p>
+}
+else
+{
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var f in facturas)
+            {
+                <tr>
+                    <td>@f.NombreFactura</td>
+                    <td>@f.Cliente</td>
+                    <td>@f.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@f.Total</td>
+                    <td>
+                        <a href="/DetalleFactura/@f.Id">Ver detalle</a>
+                        <button @onclick="() => Eliminar(f.Id)">Eliminar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Factura>? facturas;
+
+    protected override async Task OnInitializedAsync()
+    {
+        facturas = await ServicioFacturas.ObtenerFacturas();
+    }
+
+    private async Task Eliminar(int id)
+    {
+        await ServicioFacturas.EliminarFactura(id);
+        facturas = await ServicioFacturas.ObtenerFacturas();
+        StateHasChanged();
+    }
+}
