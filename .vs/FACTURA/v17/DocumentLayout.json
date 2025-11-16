@@ -1,0 +1,204 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|c:\\users\\guillermo\\desktop\\factura\\components\\pages\\facturanueva.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|solutionrelative:components\\pages\\facturanueva.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|c:\\users\\guillermo\\desktop\\factura\\components\\data\\serviciofactura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|solutionrelative:components\\data\\serviciofactura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|c:\\users\\guillermo\\desktop\\factura\\components\\data\\factura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|solutionrelative:components\\data\\factura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|c:\\users\\guillermo\\desktop\\factura\\components\\data\\articulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|solutionrelative:components\\data\\articulo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|c:\\users\\guillermo\\desktop\\factura\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|solutionrelative:components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|c:\\users\\guillermo\\desktop\\factura\\components\\pages\\error.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|solutionrelative:components\\pages\\error.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|c:\\users\\guillermo\\desktop\\factura\\components\\pages\\detallefactura.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|solutionrelative:components\\pages\\detallefactura.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|c:\\users\\guillermo\\desktop\\factura\\components\\pages\\listafacturas.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|solutionrelative:components\\pages\\listafacturas.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|c:\\users\\guillermo\\desktop\\factura\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|c:\\users\\guillermo\\desktop\\factura\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|solutionrelative:components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|c:\\users\\guillermo\\desktop\\factura\\wwwroot\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{6A8560A8-34B5-752F-E1B0-11FFC6CFA0D3}|FACTURA.csproj|solutionrelative:wwwroot\\app.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 9,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "_Imports.razor",
+              "DocumentMoniker": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Components\\_Imports.razor",
+              "RelativeDocumentMoniker": "Components\\_Imports.razor",
+              "ToolTip": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Components\\_Imports.razor",
+              "RelativeToolTip": "Components\\_Imports.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-10T18:34:26.087Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DetalleFactura.razor",
+              "DocumentMoniker": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Components\\Pages\\DetalleFactura.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\DetalleFactura.razor",
+              "ToolTip": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Components\\Pages\\DetalleFactura.razor",
+              "RelativeToolTip": "Components\\Pages\\DetalleFactura.razor",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAYwDEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-10T18:10:05.326Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ListaFacturas.razor",
+              "DocumentMoniker": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Components\\Pages\\ListaFacturas.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\ListaFacturas.razor",
+              "ToolTip": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Components\\Pages\\ListaFacturas.razor",
+              "RelativeToolTip": "Components\\Pages\\ListaFacturas.razor",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwDsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-10T18:09:45.591Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Home.razor",
+              "DocumentMoniker": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Components\\Pages\\Home.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Home.razor",
+              "ToolTip": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Components\\Pages\\Home.razor",
+              "RelativeToolTip": "Components\\Pages\\Home.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-05T21:13:36.482Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "app.css",
+              "DocumentMoniker": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\wwwroot\\app.css",
+              "RelativeDocumentMoniker": "wwwroot\\app.css",
+              "ToolTip": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\wwwroot\\app.css",
+              "RelativeToolTip": "wwwroot\\app.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-11-05T21:05:13.736Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Error.razor",
+              "DocumentMoniker": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Components\\Pages\\Error.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Error.razor",
+              "ToolTip": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Components\\Pages\\Error.razor",
+              "RelativeToolTip": "Components\\Pages\\Error.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-05T20:24:14.928Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-05T20:25:34.639Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ServicioFactura.cs",
+              "DocumentMoniker": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Components\\Data\\ServicioFactura.cs",
+              "RelativeDocumentMoniker": "Components\\Data\\ServicioFactura.cs",
+              "ToolTip": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Components\\Data\\ServicioFactura.cs",
+              "RelativeToolTip": "Components\\Data\\ServicioFactura.cs",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAcwJsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-05T20:25:13.508Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FacturaNueva.razor",
+              "DocumentMoniker": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Components\\Pages\\FacturaNueva.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\FacturaNueva.razor",
+              "ToolTip": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Components\\Pages\\FacturaNueva.razor",
+              "RelativeToolTip": "Components\\Pages\\FacturaNueva.razor",
+              "ViewState": "AgIAADYAAAAAAAAAAAAowEwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-05T20:24:28.028Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Factura.cs",
+              "DocumentMoniker": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Components\\Data\\Factura.cs",
+              "RelativeDocumentMoniker": "Components\\Data\\Factura.cs",
+              "ToolTip": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Components\\Data\\Factura.cs",
+              "RelativeToolTip": "Components\\Data\\Factura.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-05T20:21:48.428Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Articulo.cs",
+              "DocumentMoniker": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Components\\Data\\Articulo.cs",
+              "RelativeDocumentMoniker": "Components\\Data\\Articulo.cs",
+              "ToolTip": "C:\\Users\\Guillermo\\Desktop\\FACTURA\\Components\\Data\\Articulo.cs",
+              "RelativeToolTip": "Components\\Data\\Articulo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-05T20:20:54.482Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

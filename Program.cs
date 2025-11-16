@@ -6,7 +6,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+<<<<<<< HEAD
 builder.Services.AddSingleton<ServicioFacturas>(); // <= registro
+=======
+// Registramos el servicio SQLite
+builder.Services.AddSingleton<ServicioFacturas>();
+builder.Services.AddSingleton<FACTURA.Components.Data.ServicioFacturas>();
+>>>>>>> SAT
+
 
 var app = builder.Build();
 

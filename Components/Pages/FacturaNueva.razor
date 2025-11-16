@@ -1,0 +1,90 @@
+﻿@page "/Facturas"
+@using FACTURA.Components.Data
+@inject ServicioFacturas ServicioFacturas
+
+<h3>Crear nueva factura</h3>
+
+<label>Nombre de la factura:</label>
+<input @bind="factura.NombreFactura" />
+<br />
+
+<label>Cliente:</label>
+<input @bind="factura.Cliente" />
+<br />
+
+<label>Fecha:</label>
+<input type="datetime-local" @bind="factura.Fecha" />
+<br />
+
+<h4>Artículos</h4>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Artículo</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (factura.Articulos.Count == 0)
+        {
+            <tr><td colspan="4">No hay artículos</td></tr>
+        }
+        else
+        {
+            @foreach (var a in factura.Articulos)
+            {
+                <tr>
+                    <td>@a.Nombre</td>
+                    <td>@a.Cantidad</td>
+                    <td>@a.Precio</td>
+                    <td>@a.Subtotal</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<input placeholder="Nombre artículo" @bind="nuevo.Nombre" />
+<input type="number" placeholder="Cantidad" @bind="nuevo.Cantidad" />
+<input type="number" placeholder="Precio" @bind="nuevo.Precio" />
+<button @onclick="AgregarArticulo">Agregar artículo</button>
+
+<br />
+<br />
+<button @onclick="GuardarFactura">Guardar Factura</button>
+
+@code {
+    private Factura factura = new();
+    private Articulo nuevo = new();
+
+    private async Task AgregarArticulo()
+    {
+        if (!string.IsNullOrWhiteSpace(nuevo.Nombre) && nuevo.Cantidad > 0)
+        {
+            factura.Articulos.Add(new Articulo
+            {
+                Nombre = nuevo.Nombre,
+                Cantidad = nuevo.Cantidad,
+                Precio = nuevo.Precio
+            });
+            nuevo = new Articulo();
+            StateHasChanged(); // 🔁 fuerza la actualización visual
+        }
+    }
+
+
+    private async Task GuardarFactura()
+    {
+        if (await ServicioFacturas.ExisteNombreFactura(factura.NombreFactura))
+        {
+            Console.WriteLine("Ya existe una factura con ese nombre");
+            return;
+        }
+
+        await ServicioFacturas.GuardarFactura(factura);
+        factura = new();
+    }
+}

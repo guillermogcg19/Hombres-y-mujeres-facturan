@@ -1,4 +1,5 @@
 ﻿@page "/ListaFacturas"
+<<<<<<< HEAD
 @rendermode InteractiveServer
 @using FACTURA.Components.Data
 @inject ServicioFacturas ServicioFacturas
@@ -21,6 +22,27 @@ else
         <thead>
             <tr>
                 <th>ID</th>
+=======
+@using FACTURA.Components.Data
+@inject ServicioFacturas ServicioFacturas
+
+<h3>Facturas guardadas</h3>
+
+@if (facturas == null)
+{
+    <p>Cargando...</p>
+}
+else if (facturas.Count == 0)
+{
+    <p>No hay facturas registradas.</p>
+}
+else
+{
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+>>>>>>> SAT
                 <th>Cliente</th>
                 <th>Fecha</th>
                 <th>Total</th>
@@ -31,12 +53,21 @@ else
             @foreach (var f in facturas)
             {
                 <tr>
+<<<<<<< HEAD
                     <td>@f.Id</td>
                     <td>@f.Cliente</td>
                     <td>@f.Fecha.ToString("yyyy-MM-dd")</td>
                     <td>@f.Total</td>
                     <td>
                         <a href="/DetalleFactura/@f.Id">Ver / Editar</a>
+=======
+                    <td>@f.NombreFactura</td>
+                    <td>@f.Cliente</td>
+                    <td>@f.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@f.Total</td>
+                    <td>
+                        <a href="/DetalleFactura/@f.Id">Ver detalle</a>
+>>>>>>> SAT
                         <button @onclick="() => Eliminar(f.Id)">Eliminar</button>
                     </td>
                 </tr>
@@ -59,6 +90,9 @@ else
         facturas = await ServicioFacturas.ObtenerFacturas();
         StateHasChanged();
     }
+<<<<<<< HEAD
 
     private void IrNuevaFactura() => Nav.NavigateTo("/Facturas");
+=======
+>>>>>>> SAT
 }

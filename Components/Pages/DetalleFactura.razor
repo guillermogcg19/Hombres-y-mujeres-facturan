@@ -1,4 +1,5 @@
 ﻿@page "/DetalleFactura/{id:int}"
+<<<<<<< HEAD
 @rendermode InteractiveServer
 @inject ServicioFacturas ServicioFacturas
 @inject NavigationManager Nav
@@ -7,11 +8,20 @@
 <h3>Detalle de Factura</h3>
 
 @if (factura is null)
+=======
+@using FACTURA.Components.Data
+@inject ServicioFacturas ServicioFacturas
+
+<h3>Detalle de factura</h3>
+
+@if (factura == null)
+>>>>>>> SAT
 {
     <p>Cargando...</p>
 }
 else
 {
+<<<<<<< HEAD
     <div>
         <label>Cliente:</label>
         <input @bind="factura.Cliente" />
@@ -20,22 +30,35 @@ else
         <button @onclick="GuardarCabecera">Guardar cambios</button>
         <button @onclick="Volver">Volver</button>
     </div>
+=======
+    <p><b>Factura:</b> @factura.NombreFactura</p>
+    <p><b>Cliente:</b> @factura.Cliente</p>
+    <p><b>Fecha:</b> @factura.Fecha.ToString("dd/MM/yyyy HH:mm")</p>
+>>>>>>> SAT
 
     <h4>Artículos</h4>
     <table border="1">
         <thead>
             <tr>
+<<<<<<< HEAD
                 <th>Nombre</th>
                 <th>Cantidad</th>
                 <th>Precio</th>
                 <th>Subtotal</th>
                 <th>Acciones</th>
+=======
+                <th>Artículo</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+>>>>>>> SAT
             </tr>
         </thead>
         <tbody>
             @foreach (var a in factura.Articulos)
             {
                 <tr>
+<<<<<<< HEAD
                     <td><input @bind="a.Nombre" /></td>
                     <td><input type="number" @bind="a.Cantidad" /></td>
                     <td><input type="number" step="0.01" @bind="a.Precio" /></td>
@@ -44,10 +67,17 @@ else
                         <button @onclick="() => ActualizarArticulo(a)">Actualizar</button>
                         <button @onclick="() => EliminarArticulo(a.Id)">Eliminar</button>
                     </td>
+=======
+                    <td>@a.Nombre</td>
+                    <td>@a.Cantidad</td>
+                    <td>@a.Precio</td>
+                    <td>@a.Subtotal</td>
+>>>>>>> SAT
                 </tr>
             }
         </tbody>
     </table>
+<<<<<<< HEAD
 
     <div style="margin-top:10px">
         <input placeholder="Nuevo artículo" @bind="nuevo.Nombre" />
@@ -57,17 +87,23 @@ else
     </div>
 
     <p><strong>Total:</strong> @factura.Total</p>
+=======
+>>>>>>> SAT
 }
 
 @code {
     [Parameter] public int id { get; set; }
     private Factura? factura;
+<<<<<<< HEAD
     private Articulo nuevo = new();
+=======
+>>>>>>> SAT
 
     protected override async Task OnInitializedAsync()
     {
         factura = await ServicioFacturas.ObtenerFacturaPorId(id);
     }
+<<<<<<< HEAD
 
     private async Task GuardarCabecera()
     {
@@ -96,4 +132,6 @@ else
     }
 
     private void Volver() => Nav.NavigateTo("/ListaFacturas");
+=======
+>>>>>>> SAT
 }
