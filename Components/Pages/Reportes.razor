@@ -1,0 +1,106 @@
+﻿@page "/Reportes"
+@rendermode InteractiveServer
+
+@using FACTURA.Components.Data
+@using System.Linq
+@inject ServicioFacturas ServicioFacturas
+@inject NavigationManager Nav
+
+<h2>📊 Reportes SAT</h2>
+
+<label>Año:</label>
+<select @onchange="CargarMeses">
+    <option value="">--Seleccione--</option>
+    @foreach (var a in años)
+    {
+        <option value="@a">@a</option>
+    }
+</select>
+
+@if (mesesDisponibles.Any())
+{
+    <label>Mes:</label>
+    <select @onchange="CargarReporte">
+        <option value="">--Seleccione--</option>
+        @foreach (var m in mesesDisponibles)
+        {
+            <option value="@m">@m</option>
+        }
+    </select>
+}
+
+<hr />
+
+@if (facturasMes == null)
+{
+    <p>Seleccione año y mes</p>
+}
+else if (!facturasMes.Any())
+{
+    <p>Sin facturas en el periodo seleccionado</p>
+}
+else
+{
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var f in facturasMes)
+            {
+                <tr>
+                    <td>@f.Id</td>
+                    <td>@f.Cliente</td>
+                    <td>@f.Fecha.ToString("yyyy-MM-dd")</td>
+                    <td>@f.Total.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h3>Total del mes: @totalMes.ToString("C")</h3>
+}
+
+<button @onclick="@(() => Nav.NavigateTo("/ListaFacturas"))">Volver</button>
+
+@code {
+    List<int> años = new();
+    List<int> mesesDisponibles = new();
+    List<Factura>? facturasMes;
+    decimal totalMes = 0;
+
+    int? añoSeleccionado;
+    int? mesSeleccionado;
+
+    protected override async Task OnInitializedAsync()
+    {
+        años = await ServicioFacturas.ObtenerAñosDisponibles();
+    }
+
+    private Task CargarMeses(ChangeEventArgs e)
+    {
+        if (int.TryParse(e?.Value?.ToString(), out int año))
+        {
+            añoSeleccionado = año;
+            mesesDisponibles = Enumerable.Range(1, 12).ToList();
+        }
+
+        // No hay llamadas async, devolvemos una Task completada
+        return Task.CompletedTask;
+    }
+
+    private async Task CargarReporte(ChangeEventArgs e)
+    {
+        if (int.TryParse(e?.Value?.ToString(), out int mes) && añoSeleccionado.HasValue)
+        {
+            mesSeleccionado = mes;
+            facturasMes = await ServicioFacturas.ObtenerFacturasPorMes(añoSeleccionado.Value, mes);
+            totalMes = await ServicioFacturas.ObtenerTotalPorMes(añoSeleccionado.Value, mes);
+        }
+    }
+}

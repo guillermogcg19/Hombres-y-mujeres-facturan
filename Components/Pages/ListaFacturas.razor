@@ -1,11 +1,14 @@
 ﻿@page "/ListaFacturas"
 @rendermode InteractiveServer
+
 @using FACTURA.Components.Data
 @inject ServicioFacturas ServicioFacturas
 @inject NavigationManager Nav
 
 <h2>🧾 Facturas</h2>
+
 <button @onclick="IrNuevaFactura">➕ Nueva Factura</button>
+<button @onclick="@(() => Nav.NavigateTo("/Reportes"))">📊 Reportes</button>
 
 @if (facturas is null)
 {

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FACTURA.Components.Data
@@ -14,6 +15,7 @@ namespace FACTURA.Components.Data
         {
             using var cx = new SqliteConnection($"Data Source={RutaDb}");
             cx.Open();
+
             var cmd = cx.CreateCommand();
             cmd.CommandText = @"
                 CREATE TABLE IF NOT EXISTS facturas(
@@ -35,21 +37,24 @@ namespace FACTURA.Components.Data
         public async Task<List<Factura>> ObtenerFacturas()
         {
             var lista = new List<Factura>();
+
             using var cx = new SqliteConnection($"Data Source={RutaDb}");
             await cx.OpenAsync();
+
             var cmd = cx.CreateCommand();
             cmd.CommandText = "SELECT id, fecha, cliente FROM facturas ORDER BY id DESC";
+
             using var rd = await cmd.ExecuteReaderAsync();
             while (await rd.ReadAsync())
             {
-                var f = new Factura
+                int id = rd.GetInt32(0);
+                lista.Add(new Factura
                 {
-                    Id = rd.GetInt32(0),
+                    Id = id,
                     Fecha = DateTime.Parse(rd.GetString(1)),
-                    Cliente = rd.GetString(2)
-                };
-                f.Articulos = await ObtenerArticulos(f.Id);
-                lista.Add(f);
+                    Cliente = rd.GetString(2),
+                    Articulos = await ObtenerArticulos(id)
+                });
             }
             return lista;
         }
@@ -58,20 +63,21 @@ namespace FACTURA.Components.Data
         {
             using var cx = new SqliteConnection($"Data Source={RutaDb}");
             await cx.OpenAsync();
+
             var cmd = cx.CreateCommand();
-            cmd.CommandText = "SELECT id, fecha, cliente FROM facturas WHERE id = $id";
+            cmd.CommandText = "SELECT id, fecha, cliente FROM facturas WHERE id=$id";
             cmd.Parameters.AddWithValue("$id", id);
+
             using var rd = await cmd.ExecuteReaderAsync();
             if (await rd.ReadAsync())
             {
-                var f = new Factura
+                return new Factura
                 {
                     Id = rd.GetInt32(0),
                     Fecha = DateTime.Parse(rd.GetString(1)),
-                    Cliente = rd.GetString(2)
+                    Cliente = rd.GetString(2),
+                    Articulos = await ObtenerArticulos(id)
                 };
-                f.Articulos = await ObtenerArticulos(f.Id);
-                return f;
             }
             return null;
         }
@@ -79,11 +85,14 @@ namespace FACTURA.Components.Data
         private async Task<List<Articulo>> ObtenerArticulos(int facturaId)
         {
             var lista = new List<Articulo>();
+
             using var cx = new SqliteConnection($"Data Source={RutaDb}");
             await cx.OpenAsync();
+
             var cmd = cx.CreateCommand();
-            cmd.CommandText = "SELECT id, nombre, cantidad, precio FROM articulos WHERE facturaId = $id";
+            cmd.CommandText = "SELECT id, nombre, cantidad, precio FROM articulos WHERE facturaId=$id";
             cmd.Parameters.AddWithValue("$id", facturaId);
+
             using var rd = await cmd.ExecuteReaderAsync();
             while (await rd.ReadAsync())
             {
@@ -103,12 +112,15 @@ namespace FACTURA.Components.Data
         {
             using var cx = new SqliteConnection($"Data Source={RutaDb}");
             await cx.OpenAsync();
+
             var cmd = cx.CreateCommand();
             cmd.CommandText = "INSERT INTO facturas(fecha, cliente) VALUES($fecha, $cliente); SELECT last_insert_rowid();";
             cmd.Parameters.AddWithValue("$fecha", f.Fecha.ToString("yyyy-MM-dd"));
             cmd.Parameters.AddWithValue("$cliente", f.Cliente);
-            var id = (long)await cmd.ExecuteScalarAsync();
-            f.Id = (int)id;
+
+            var result = await cmd.ExecuteScalarAsync();
+            f.Id = Convert.ToInt32(result);
+
             foreach (var a in f.Articulos)
                 await AgregarArticulo(f.Id, a);
         }
@@ -117,11 +129,13 @@ namespace FACTURA.Components.Data
         {
             using var cx = new SqliteConnection($"Data Source={RutaDb}");
             await cx.OpenAsync();
+
             var cmd = cx.CreateCommand();
             cmd.CommandText = "UPDATE facturas SET fecha=$fecha, cliente=$cliente WHERE id=$id";
             cmd.Parameters.AddWithValue("$fecha", f.Fecha.ToString("yyyy-MM-dd"));
             cmd.Parameters.AddWithValue("$cliente", f.Cliente);
             cmd.Parameters.AddWithValue("$id", f.Id);
+
             await cmd.ExecuteNonQueryAsync();
         }
 
@@ -129,12 +143,14 @@ namespace FACTURA.Components.Data
         {
             using var cx = new SqliteConnection($"Data Source={RutaDb}");
             await cx.OpenAsync();
+
             var cmd = cx.CreateCommand();
             cmd.CommandText = "UPDATE articulos SET nombre=$nombre, cantidad=$cantidad, precio=$precio WHERE id=$id";
             cmd.Parameters.AddWithValue("$nombre", a.Nombre);
             cmd.Parameters.AddWithValue("$cantidad", a.Cantidad);
             cmd.Parameters.AddWithValue("$precio", a.Precio);
             cmd.Parameters.AddWithValue("$id", a.Id);
+
             await cmd.ExecuteNonQueryAsync();
         }
 
@@ -142,9 +158,11 @@ namespace FACTURA.Components.Data
         {
             using var cx = new SqliteConnection($"Data Source={RutaDb}");
             await cx.OpenAsync();
+
             var cmd = cx.CreateCommand();
             cmd.CommandText = "DELETE FROM articulos WHERE id=$id";
             cmd.Parameters.AddWithValue("$id", articuloId);
+
             await cmd.ExecuteNonQueryAsync();
         }
 
@@ -152,12 +170,14 @@ namespace FACTURA.Components.Data
         {
             using var cx = new SqliteConnection($"Data Source={RutaDb}");
             await cx.OpenAsync();
+
             var cmd = cx.CreateCommand();
-            cmd.CommandText = "INSERT INTO articulos(facturaId, nombre, cantidad, precio) VALUES($facturaId,$nombre,$cantidad,$precio)";
+            cmd.CommandText = "INSERT INTO articulos(facturaId, nombre, cantidad, precio) VALUES($facturaId, $nombre, $cantidad, $precio)";
             cmd.Parameters.AddWithValue("$facturaId", facturaId);
             cmd.Parameters.AddWithValue("$nombre", a.Nombre);
             cmd.Parameters.AddWithValue("$cantidad", a.Cantidad);
             cmd.Parameters.AddWithValue("$precio", a.Precio);
+
             await cmd.ExecuteNonQueryAsync();
         }
 
@@ -165,14 +185,78 @@ namespace FACTURA.Components.Data
         {
             using var cx = new SqliteConnection($"Data Source={RutaDb}");
             await cx.OpenAsync();
-            var cmd1 = cx.CreateCommand();
-            cmd1.CommandText = "DELETE FROM articulos WHERE facturaId=$id";
-            cmd1.Parameters.AddWithValue("$id", id);
-            await cmd1.ExecuteNonQueryAsync();
-            var cmd2 = cx.CreateCommand();
-            cmd2.CommandText = "DELETE FROM facturas WHERE id=$id";
-            cmd2.Parameters.AddWithValue("$id", id);
-            await cmd2.ExecuteNonQueryAsync();
+
+            var c1 = cx.CreateCommand();
+            c1.CommandText = "DELETE FROM articulos WHERE facturaId=$id";
+            c1.Parameters.AddWithValue("$id", id);
+            await c1.ExecuteNonQueryAsync();
+
+            var c2 = cx.CreateCommand();
+            c2.CommandText = "DELETE FROM facturas WHERE id=$id";
+            c2.Parameters.AddWithValue("$id", id);
+            await c2.ExecuteNonQueryAsync();
+        }
+
+        public async Task<List<int>> ObtenerAñosDisponibles()
+        {
+            var lista = new List<int>();
+
+            using var cx = new SqliteConnection($"Data Source={RutaDb}");
+            await cx.OpenAsync();
+
+            var cmd = cx.CreateCommand();
+            cmd.CommandText = "SELECT DISTINCT strftime('%Y', fecha) FROM facturas ORDER BY 1 DESC";
+
+            using var rd = await cmd.ExecuteReaderAsync();
+            while (await rd.ReadAsync())
+                lista.Add(int.Parse(rd.GetString(0)));
+
+            return lista;
+        }
+
+        public async Task<List<Factura>> ObtenerFacturasPorMes(int año, int mes)
+        {
+            var lista = new List<Factura>();
+
+            using var cx = new SqliteConnection($"Data Source={RutaDb}");
+            await cx.OpenAsync();
+
+            var cmd = cx.CreateCommand();
+            cmd.CommandText = @"
+                SELECT id, fecha, cliente 
+                FROM facturas
+                WHERE strftime('%Y', fecha) = $año
+                AND strftime('%m', fecha) = $mes
+                ORDER BY fecha ASC";
+
+            cmd.Parameters.AddWithValue("$año", año.ToString());
+            cmd.Parameters.AddWithValue("$mes", mes.ToString("00"));
+
+            using var rd = await cmd.ExecuteReaderAsync();
+            while (await rd.ReadAsync())
+            {
+                int idfact = rd.GetInt32(0);
+                lista.Add(new Factura
+                {
+                    Id = idfact,
+                    Fecha = DateTime.Parse(rd.GetString(1)),
+                    Cliente = rd.GetString(2),
+                    Articulos = await ObtenerArticulos(idfact)
+                });
+            }
+
+            return lista;
+        }
+
+        public async Task<decimal> ObtenerTotalPorMes(int año, int mes)
+        {
+            var facturas = await ObtenerFacturasPorMes(año, mes);
+            decimal total = 0;
+
+            foreach (var f in facturas)
+                total += f.Total;
+
+            return total;
         }
     }
 }
